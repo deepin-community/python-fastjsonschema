@@ -1,0 +1,64 @@
+From: Adam Cecile <acecile@le-vert.net>
+Date: Sat, 16 Mar 2024 11:56:37 +0100
+Subject: Disable_unittest_requiring_internet
+
+Origin: vendor
+Forwarded: not-needed
+Last-Update: 2020-01-15
+---
+ tests/json_schema/test_draft04.py | 6 ++++++
+ tests/json_schema/test_draft06.py | 6 ++++++
+ tests/json_schema/test_draft07.py | 6 ++++++
+ 3 files changed, 18 insertions(+)
+
+diff --git a/tests/json_schema/test_draft04.py b/tests/json_schema/test_draft04.py
+index 7b980b8..293f2ee 100644
+--- a/tests/json_schema/test_draft04.py
++++ b/tests/json_schema/test_draft04.py
+@@ -10,6 +10,12 @@ def pytest_generate_tests(metafunc):
+         ignored_suite_files=[
+             # Optional.
+             'ecmascript-regex.json',
++            # Require Internet access
++            'definitions.json',
++        ],
++        ignore_tests=[
++            # In ref.json: Require Internet access
++            'remote ref, containing refs itself'
+         ],
+     )
+     metafunc.parametrize(['schema_version', 'schema', 'data', 'is_valid'], param_values, ids=param_ids)
+diff --git a/tests/json_schema/test_draft06.py b/tests/json_schema/test_draft06.py
+index a62d75d..bb8ca16 100644
+--- a/tests/json_schema/test_draft06.py
++++ b/tests/json_schema/test_draft06.py
+@@ -10,6 +10,12 @@ def pytest_generate_tests(metafunc):
+         ignored_suite_files=[
+             # Optional.
+             'ecmascript-regex.json',
++            # Require Internet access
++            'definitions.json',
++        ],
++        ignore_tests=[
++            # In ref.json: Require Internet access
++            'remote ref, containing refs itself'
+         ],
+     )
+     metafunc.parametrize(['schema_version', 'schema', 'data', 'is_valid'], param_values, ids=param_ids)
+diff --git a/tests/json_schema/test_draft07.py b/tests/json_schema/test_draft07.py
+index bc7b291..3f8676b 100644
+--- a/tests/json_schema/test_draft07.py
++++ b/tests/json_schema/test_draft07.py
+@@ -12,6 +12,12 @@ def pytest_generate_tests(metafunc):
+             'ecmascript-regex.json',
+             'idn-hostname.json',
+             'iri.json',
++            # Require Internet access
++            'definitions.json',
++        ],
++        ignore_tests=[
++            # In ref.json: Require Internet access
++            'remote ref, containing refs itself'
+         ],
+     )
+     metafunc.parametrize(['schema_version', 'schema', 'data', 'is_valid'], param_values, ids=param_ids)

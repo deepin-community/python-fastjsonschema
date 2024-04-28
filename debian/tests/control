@@ -1,0 +1,9 @@
+Tests:
+ smoke
+Depends:
+ json-schema-test-suite,
+ python3-all,
+ python3-pytest,
+ python3-pytest-benchmark,
+ @,
+Restrictions: allow-stderr
