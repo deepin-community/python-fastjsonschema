@@ -1,0 +1,9 @@
+Document: python-fastjsonschema
+Title: Debian python-fastjsonschema manual
+Author: Michal Horejsek <horejsekmichal@gmail.com>
+Abstract: User HTML documentation of fastjsonschema Python module
+Section: Programming/Python
+
+Format: HTML
+Index: /usr/share/doc/python-fastjsonschema-doc/html/index.html
+Files: /usr/share/doc/python-fastjsonschema-doc/html/*.html

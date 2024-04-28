@@ -1,0 +1,3 @@
+Disable_sphinxtogithub_doc_ext.patch
+Disable_unittest_requiring_internet.patch
+Use-warnings.catch_warnings-instead-of-pytest.warns-None-.patch

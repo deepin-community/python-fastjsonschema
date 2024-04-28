@@ -1,4 +1,32 @@
 #!/usr/bin/make -f
+# -*- makefile -*-
+
+#export DH_VERBOSE=1
+
+include /usr/share/dpkg/pkg-info.mk
+
+BUILD_DATE  = $(shell LC_ALL=C date -u "+%d %B %Y" -d "@$(SOURCE_DATE_EPOCH)")
+SPHINXOPTS := -E -N -D html_last_updated_fmt="$(BUILD_DATE)"
+
+export PYBUILD_NAME=fastjsonschema
+
+export PYBUILD_BEFORE_TEST=cp -r /usr/share/json-schema-test-suite/ {build_dir}/JSON-Schema-Test-Suite
+export PYBUILD_AFTER_TEST=rm -rf {build_dir}/JSON-Schema-Test-Suite
 
 %:
-	dh $@
+	dh $@ --buildsystem=pybuild
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf .pytest_cache
+
+override_dh_sphinxdoc:
+ifeq (,$(findstring nodoc, $(DEB_BUILD_OPTIONS)))
+	PYTHONPATH=src python3 -m sphinx -b html $(SPHINXOPTS) docs $(CURDIR)/debian/python-fastjsonschema-doc/usr/share/doc/python-fastjsonschema-doc/html
+	dh_sphinxdoc
+endif
+
+override_dh_auto_test:
+ifeq ($(filter nocheck,$(DEB_BUILD_PROFILES)),)
+	dh_auto_test
+endif
